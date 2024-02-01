@@ -34,10 +34,7 @@ public class StudentTest
   [Fact]
   public void PassingTest()
   {
-    /* var students = _fixture.CreateMany<Student>().AsQueryable().BuildMockDbSet(); */
     var students = _fixture.Create<List<Student>>();
-    Console.WriteLine("Size: " + students.Count);
-    Console.WriteLine(students[0].Name);
 
     _context.SetupSequence(x => x.Set<Student>()).ReturnsDbSet(students);
 
