@@ -45,8 +45,25 @@ public class StudentRepository : IStudentRepository
     {
       throw new HttpResponseException(BAD_REQUEST, STUDENT_NULL);
     }
+
     var createStudent = await _context.AddAsync(student);
-    await _context.SaveChangesAsync();
+    try
+    {
+      await _context.SaveChangesAsync();
+    }
+    catch (OperationCanceledException e)
+    {
+      throw e;
+    }
+    catch (DbUpdateConcurrencyException e)
+    {
+      throw e;
+    }
+    catch (DbUpdateException e)
+    {
+      throw e;
+    }
+
     return createStudent.Entity;
   }
 
@@ -78,9 +95,17 @@ public class StudentRepository : IStudentRepository
     {
       await _context.SaveChangesAsync();
     }
-    catch (DbUpdateConcurrencyException)
+    catch (OperationCanceledException e)
     {
-      throw new Exception();
+      throw e;
+    }
+    catch (DbUpdateConcurrencyException e)
+    {
+      throw e;
+    }
+    catch (DbUpdateException e)
+    {
+      throw e;
     }
   }
 
@@ -96,15 +121,23 @@ public class StudentRepository : IStudentRepository
     {
       throw new Exception();
     }
+    _context.Students.Remove(studentItem);
 
     try
     {
-      _context.Students.Remove(studentItem);
       await _context.SaveChangesAsync();
     }
-    catch (DbUpdateConcurrencyException)
+    catch (OperationCanceledException e)
     {
-      throw new Exception();
+      throw e;
+    }
+    catch (DbUpdateConcurrencyException e)
+    {
+      throw e;
+    }
+    catch (DbUpdateException e)
+    {
+      throw e;
     }
   }
 }

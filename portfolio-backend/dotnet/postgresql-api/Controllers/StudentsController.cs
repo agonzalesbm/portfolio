@@ -26,10 +26,6 @@ public class StudentsController : ControllerBase
   public async Task<ActionResult<Student>> Get(int id)
   {
     var student = await _service.Get(id);
-    if (student is null)
-    {
-      return NotFound();
-    }
     return Ok(student);
   }
 
