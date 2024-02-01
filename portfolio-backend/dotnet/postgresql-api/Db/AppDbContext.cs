@@ -9,4 +9,5 @@ public class AppDbContext : DbContext
   }
 
   public DbSet<Student> Students { get; set; } = null!;
+  public DbSet<Subject> Subjects { get; set; } = null!;
 }
