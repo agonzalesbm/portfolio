@@ -23,14 +23,15 @@ public class StudentServiceTest
   [Fact]
   public void GetAll_StudentListWithElements_SizeGreatherThanZero()
   {
-    var setudents = fixture.Create<IEnumerable<Student>>();
-    repositoryMock.Setup(r => r.GetAll()).ReturnsAsync(setudents);
+    var students = fixture.Create<List<Student>>();
+    repositoryMock.Setup(r => r.GetAll()).ReturnsAsync(students);
 
     var getStudents = serviceMock.GetAll().Result;
 
     repositoryMock.Verify(r => r.GetAll(), Times.Once);
     Assert.NotNull(getStudents);
     Assert.True(getStudents.Count() > 0);
+    Assert.IsType<List<Student>>(getStudents);
   }
 
   [Fact]
@@ -85,23 +86,24 @@ public class StudentServiceTest
   }
 
   [Fact]
-  public async Task Delete_StudentListWithElements_CompletedTaskAfterDelete()
+  public void Delete_StudentListWithElements_CompletedTaskAfterDelete()
   {
     var id = 223;
-    var students = fixture.Create<IEnumerable<Student>>();
+    var students = fixture.Create<List<Student>>();
     var student = fixture.Build<Student>()
       .With(s => s.Id, id)
       .Create();
     students.Append(student);
     repositoryMock.Setup(r => r.Delete(id)).Returns(Task.CompletedTask);
 
-    await serviceMock.Delete(id);
+    var resultTask = serviceMock.Delete(id);
 
     repositoryMock.Verify(r => r.Delete(id), Times.Once);
+    Assert.True(resultTask.IsCompletedSuccessfully);
   }
 
   [Fact]
-  public async Task Update_StudentListWithElements_CompletedTaskAfterDelete()
+  public void Update_StudentListWithElements_CompletedTaskAfterUpdate()
   {
     var id = 334;
     var students = fixture.Create<IEnumerable<Student>>();
@@ -111,8 +113,9 @@ public class StudentServiceTest
     students.Append(student);
     repositoryMock.Setup(r => r.Update(id, student)).Returns(Task.CompletedTask);
 
-    await serviceMock.Update(id, student);
+    var resultTask = serviceMock.Update(id, student);
 
     repositoryMock.Verify(r => r.Update(id, student));
+    Assert.True(resultTask.IsCompletedSuccessfully);
   }
 }
