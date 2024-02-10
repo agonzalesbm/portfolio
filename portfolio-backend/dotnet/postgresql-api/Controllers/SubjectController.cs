@@ -16,7 +16,7 @@ public class SubjectController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Subject>>> GetAll()
+  public async Task<ActionResult<List<Subject>>> GetAll()
   {
     var subjects = await _service.GetAll();
     return Ok(subjects);
