@@ -1,4 +1,4 @@
-namespace postgresql_api;
+﻿namespace postgresql_api;
 
 public class WeatherForecast
 {
