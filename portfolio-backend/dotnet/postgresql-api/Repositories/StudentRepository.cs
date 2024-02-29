@@ -2,6 +2,7 @@
 using postgresql_api.Db;
 using postgresql_api.Exceptions;
 using postgresql_api.Models;
+using Serilog;
 
 namespace postgresql_api.Repository;
 
@@ -21,6 +22,7 @@ public class StudentRepository : IStudentRepository
 
     public async Task<IEnumerable<Student>> GetAll()
     {
+        Log.Information("GetAll() of student repository called...");
         return await _context.Students.ToListAsync();
     }
 
