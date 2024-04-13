@@ -1,0 +1,5 @@
+[MAIN]
+suggestion-mode=yes
+ignore=README.md, .gitignore, requirements.txt, docker-compose.yml
+[MESSAGES CONTROL]
+disable=E0401
