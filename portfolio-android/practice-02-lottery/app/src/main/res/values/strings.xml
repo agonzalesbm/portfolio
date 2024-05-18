@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">lottery</string>
+    <string name="welcome_to_lottery_generator">Welcome to Lottery Generator</string>
+    <string name="your_lottery_numbers">Your Lottery Numbers:</string>
+    <string name="generate_button">Generate Random Lottery Numbers</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="_0">0</string>
+    <string name="share_lottery_button">Share my lottery buttons</string>
+</resources>
